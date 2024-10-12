@@ -1,0 +1,5 @@
+server:
+  port: 8086
+spring:
+  application:
+    back-end-url: http://localhost:8085/api/v1
