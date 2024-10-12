@@ -55,4 +55,24 @@ public class FakultasController {
         this.fakultasService.update(fakultasReq.getId(), fakultasReq);
         return new ModelAndView("redirect:/fakultas");
     }
+
+    @GetMapping("/delete/{id}")
+    public ModelAndView remove(@PathVariable("id") String id){
+        ModelAndView modelAndView = new ModelAndView("pages/fakultas/delete");
+
+        Optional<FakultasRes> result = this.fakultasService.getById(id);
+        if(result.isPresent()){
+            modelAndView.addObject("data", result.get());
+            return modelAndView;
+        }
+
+        return new ModelAndView("redirect:/fakultas");
+    }
+
+    @PostMapping("/remove")
+    public ModelAndView remove(@ModelAttribute FakultasReq fakultasReq){
+        this.fakultasService.delete(fakultasReq.getId());
+        return new ModelAndView("redirect:/fakultas");
+    }
+
 }
